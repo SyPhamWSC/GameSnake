@@ -1,15 +1,14 @@
 package com.leojr.uet.snake;
 
 import com.leojr.uet.snake.common.CommonVls;
-import com.leojr.uet.snake.ui.GameScreen;
+import com.leojr.uet.snake.ui.GameScreenPanel;
+import com.leojr.uet.snake.ui.PlayingInfoPanel;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class PlayScreen extends JFrame{
-    private GameScreen gameScreen;
+    private GameScreenPanel gameScreen;
+    private PlayingInfoPanel playingInfoPanel;
     public PlayScreen(){
         init();
         compoments();
@@ -25,8 +24,11 @@ public class PlayScreen extends JFrame{
         this.setResizable(false);
         this.setLocation(300,100);
 
-        this.gameScreen= new GameScreen();
+        this.gameScreen= new GameScreenPanel();
+        this.playingInfoPanel = new PlayingInfoPanel();
         add(gameScreen);
+        add(playingInfoPanel);
+
     }
 
     public static void main(String args[]){

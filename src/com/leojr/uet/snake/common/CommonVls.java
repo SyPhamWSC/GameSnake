@@ -11,10 +11,17 @@ import java.io.File;
 import java.io.IOException;
 
 public class CommonVls {
-    public static final int SCREEN_WIDTH = 510;
-    public static final int SCREEN_HEIGHT = 510;
+    public static final String IS_STOPPED = "PRESS SPACE TO CONTINUE";
+
+    public static final int GAME_WIDTH = 528;
+    public static final int GAME_HEIGHT = 552;
     public static final int ARR_SIZE = 25;
     public static final int FOOD_SIZE = 20;
+    public static final int PADDING = 14;
+    public static final int SCREEN_WIDTH = 800;
+    public static final int SCREEN_HEIGHT = 552;
+    public static final int PLAY_INFO_WIDTH = 266;
+    public static final int PLAY_INFO_HEIGHT = 552;
 
     public static final int GO_UP = 1;
     public static final int GO_DOWN = -1;
@@ -52,7 +59,7 @@ public class CommonVls {
 
             worm = sprite.getSubimage(2,40,30,30);
             worm2 = sprite.getSubimage(32,40,30,30);
-            worm3 = sprite.getSubimage(66,40,30,30);
+            worm3 = sprite.getSubimage(64,40,30,30);
 
         } catch (IOException e) {
             e.printStackTrace();

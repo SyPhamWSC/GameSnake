@@ -3,7 +3,6 @@ package com.leojr.uet.snake.object;
 
 import com.leojr.uet.snake.animation.Animation;
 import com.leojr.uet.snake.common.CommonVls;
-import com.leojr.uet.snake.ui.GameScreen;
 
 import java.awt.*;
 import java.util.Random;
@@ -15,12 +14,14 @@ public class Snake {
     private int []x = new int[ARR_SIZE]; // Snake's coordinates are stored in the array
     private int []y = new int[ARR_SIZE];; // Snake's coordinates are stored in the array
     private int direction; // Derection of the snake
-    private int beginTime;
+    private long beginTime;
 
     private int currentImage;
     private Animation animation;
+    private boolean isDead;
 
     public Snake(){
+        isDead = false;
         /*
         Set location, length and direction of the snake
          */
@@ -55,8 +56,9 @@ public class Snake {
                 "
             program will have BIG BUG =="
              */
-            beginTime = (int) System.currentTimeMillis();
+            beginTime =  System.currentTimeMillis();
         }
+        checkDie();
 
     }
 
@@ -65,9 +67,9 @@ public class Snake {
      */
     public void paintSnake(Graphics graphics){
         graphics.setColor(Color.red);
-        graphics.drawImage(animation.getCurrentImg(this.direction),x[0]*20-5 ,y[0]*20-5,null);
+        graphics.drawImage(animation.getCurrentImg(this.direction),x[0]*20-6 + CommonVls.PADDING,y[0]*20-6 + CommonVls.PADDING,null);
         for (int i = 1; i <length ; i++) {
-            graphics.drawImage(CommonVls.snakeBody,x[i]*20 ,y[i]*20,null);
+            graphics.drawImage(CommonVls.snakeBody,x[i]*20 + CommonVls.PADDING ,y[i]*20 + CommonVls.PADDING,null);
         }
     }
 
@@ -114,9 +116,7 @@ public class Snake {
     public int getLength(){
         return this.length;
     }
-    public void setLength(int length){
-        this.length = length;
-    }
+
     private Food setNewFoodLocation(){
         Random r = new Random();
         int x;
@@ -127,6 +127,7 @@ public class Snake {
         }while (isFoodInsideSnake(x,y));
         return new Food(x,y);
     }
+
     private boolean isFoodInsideSnake(int x, int y){
         for (int i = 0; i < this.length; i++) {
             if(this.x[i]==x&&this.y[i]==y){
@@ -134,5 +135,18 @@ public class Snake {
             }
         }
         return false;
+    }
+
+    private void checkDie(){
+        for (int i = 1; i <this.length ; i++) {
+            if(x[0]== x[i]&&y[0]==y[i]){
+                isDead = true;
+                System.out.print("die");
+            }
+        }
+    }
+
+    public boolean isDead() {
+        return isDead;
     }
 }
